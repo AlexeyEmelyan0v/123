@@ -7,7 +7,7 @@ signed main(){
     getline(cin,name);
     cout<<"Your surname: ";
     getline(cin,surname);
-    cout<<"Your favourite movie: ";
+    cout<<"What book do you recommend to read? ";
     getline(cin,movie);
     fstream outf;
     outf.open("Readme.txt");
