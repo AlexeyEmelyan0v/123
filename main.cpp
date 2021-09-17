@@ -1,6 +1,13 @@
 #include <bits/stdc++.h>
 using namespace std;
-
+void out(){
+    string str;
+    fstream outf;
+    outf.open("res.txt",ios::in);
+    while(getline(outf,str)){
+        cout<<str<<endl;
+    }
+}
 signed main(){
     string name,surname,movie;
     cout<<"Your name: ";
@@ -12,5 +19,6 @@ signed main(){
     fstream outf;
     outf.open("res.txt",ios::app);
     outf<<name<<" "<<surname<<" "<<movie<<endl;
+    out();
     return 0;
 }
