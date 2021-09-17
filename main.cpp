@@ -10,7 +10,7 @@ signed main(){
     cout<<"What book do you recommend to read? ";
     getline(cin,movie);
     fstream outf;
-    outf.open("Readme.txt");
+    outf.open("res.txt",ios::app);
     outf<<name<<" "<<surname<<" "<<movie<<endl;
     return 0;
 }
