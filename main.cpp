@@ -9,6 +9,11 @@ void out(){
     }
 }
 signed main(){
+    string cmd;
+    cout<<"Enter 1 if you want to answer the questions of the survey or enter 2 if you want to see the results of the survey"<<endl;
+    getline(cin,cmd);
+    cout<<endl;
+    if(cmd=="1"){
     string name,surname,movie;
     cout<<"Your name: ";
     getline(cin,name);
@@ -19,6 +24,8 @@ signed main(){
     fstream outf;
     outf.open("res.txt",ios::app);
     outf<<name<<" "<<surname<<" "<<movie<<endl;
-    out();
+    }else if(cmd=="2"){
+        out();
+    }
     return 0;
 }
