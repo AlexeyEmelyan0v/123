@@ -14,16 +14,23 @@ signed main(){
     getline(cin,cmd);
     cout<<endl;
     if(cmd=="1"){
-    string name,surname,movie;
+    string name,surname;
     cout<<"Your name: ";
     getline(cin,name);
     cout<<"Your surname: ";
     getline(cin,surname);
-    cout<<"What book do you recommend to read? ";
-    getline(cin,movie);
+    fstream inf;
     fstream outf;
     outf.open("res.txt",ios::app);
-    outf<<name<<" "<<surname<<" "<<movie<<endl;
+    inf.open("inputfile.txt",ios::in);
+    outf<<name<<" "<<surname<<" ";
+    string str;
+    while(getline(inf,str)){
+        cout<<str<<endl;
+        getline(cin,str);
+        outf<<str<<" ";
+    }
+    outf<<endl;
     }else if(cmd=="2"){
         out();
     }
