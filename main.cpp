@@ -5,12 +5,16 @@ void out(){
     fstream outf;
     outf.open("res.txt",ios::in);
     set<string> s;
+    int i=0;
+    int cnt=0;
     while(getline(outf,str)){
-        s.insert(str);
+        if(i%2==1){
+            s.insert(str);
+            cnt++;
+        }
+        i++;
     }
-    for(auto elem: s){
-        cout<<elem<<endl;
-    }
+    cout<<cnt<<" people "<<s.size()<<" different books";
 }
 signed main(){
     string cmd;
@@ -23,17 +27,13 @@ signed main(){
     getline(cin,name);
     cout<<"Your surname: ";
     getline(cin,surname);
-    fstream inf;
     fstream outf;
     outf.open("res.txt",ios::app);
-    inf.open("inputfile.txt",ios::in);
-    outf<<name<<" "<<surname<<" ";
+    outf<<name<<" "<<surname<<endl;
     string str;
-    while(getline(inf,str)){
-        cout<<str<<endl;
-        getline(cin,str);
-        outf<<str<<" ";
-    }
+    cout<<"What book do you recommend to read?"<<endl;
+    getline(cin,str);
+    outf<<str<<" ";
     outf<<endl;
     }else if(cmd=="2"){
         out();
