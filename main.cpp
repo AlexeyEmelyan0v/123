@@ -4,8 +4,12 @@ void out(){
     string str;
     fstream outf;
     outf.open("res.txt",ios::in);
+    set<string> s;
     while(getline(outf,str)){
-        cout<<str<<endl;
+        s.insert(str);
+    }
+    for(auto elem: s){
+        cout<<elem<<endl;
     }
 }
 signed main(){
