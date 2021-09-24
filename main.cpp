@@ -1,43 +1,58 @@
 #include <bits/stdc++.h>
 using namespace std;
-void out(int q){
-    string str,name,surname,book;
+int qnum=0;
+int q;
+bool srt(vector<string> a,vector<string> b){
+    int c;
+    string astr=a[q-1];
+    string bstr=b[q-1];
+    c=min(astr.size(),bstr.size());
+    for(int i=0;i<c;i++){
+        if(astr[i]>='A' && astr[i]<='Z'){
+            astr[i]+=32;
+        }
+        if(bstr[i]>='A' && bstr[i]<='Z'){
+            bstr[i]+=32;
+        }
+        if((astr[i])<(bstr[i])){
+            return true;
+        }else if(astr[i]>bstr[i]){
+            return false;
+        }
+    }
+    if(astr.size()<bstr.size()){
+        return true;
+    }
+    return false;
+}
+void out(){
+    string str,name,surname,ans;
+    fstream inf;
+    inf.open("inputfile.txt",ios::in);
+    while(getline(inf,str)){
+        qnum++;
+    }
     fstream outf;
-    set<vector<string>> s;
+    vector<vector<string>> s;
     outf.open("res.txt",ios::in);
-    if(q==1){
-        while(outf>>name>>surname>>book){
-            vector<string> a(3);
-            a[0]=name;
-            a[1]=surname;
-            a[2]=book;
-            s.insert(a);
+    vector<string> b;
+    while(getline(outf,name)){
+        b.clear();
+        b.push_back(name);
+        getline(outf,surname);
+        b.push_back(surname);
+        for(int i=0;i<qnum;i++){
+            getline(outf,ans);
+            b.push_back(ans);
         }
-        for(auto elem: s){
-            cout<<elem[0]<<" "<<elem[1]<<" "<<elem[2]<<endl;
+        s.push_back(b);
+    }
+    sort(s.begin(),s.end(),srt);
+    for(int j=0;j<s.size();j++){
+        for(int i=0;i<s[j].size();i++){
+            cout<<s[j][i]<<" ";
         }
-    }else if(q==2){
-        while(outf>>name>>surname>>book){
-            vector<string> a(3);
-            a[0]=surname;
-            a[1]=name;
-            a[2]=book;
-            s.insert(a);
-        }
-        for(auto elem: s){
-            cout<<elem[1]<<" "<<elem[0]<<" "<<elem[2]<<endl;
-        }
-    }else if(q==3){
-        while(outf>>name>>surname>>book){
-            vector<string> a(3);
-            a[0]=book;
-            a[1]=name;
-            a[2]=surname;
-            s.insert(a);
-        }
-        for(auto elem: s){
-            cout<<elem[1]<<" "<<elem[2]<<" "<<elem[0]<<endl;
-        }
+        cout<<"\n";
     }
 }
 
@@ -45,13 +60,13 @@ void change_q() {
     ofstream res;
     res.open("res.txt");
     ofstream in;
-    in.open("q.txt");
+    in.open("inputfile.txt");
     cout << "Number of questions: ";
-    int k; cin >> k;
-    string q; getline(cin, q);
-    for (int i = 0; i < k; ++i) {
-        getline(cin, q);
-        in << q << "\n";
+    cin>>qnum;
+    string qt; getline(cin, qt);
+    for (int i = 0; i < qnum; ++i) {
+        getline(cin, qt);
+        in << qt << "\n";
     }
 }
 
@@ -61,21 +76,28 @@ signed main(){
     getline(cin,cmd);
     cout<<endl;
     if(cmd=="1"){
-        ifstream q;
-        ofstream res;
-        q.open("q.txt");
+        fstream qi;
+        fstream res;
+        string name,surname;
+        qi.open("inputfile.txt",ios::in);
         res.open("res.txt", ios::app);
-        string qt;
-        while (getline(q, qt)) {
-            cout << qt << ' ';
-            string ans; cin >> ans;
+        string qr;
+        cout<<"What is your name? ";
+        cin>>name;
+        res<<name<<"\n";
+        cout<<"What is your surname? ";
+        cin>>surname;
+        res<<surname<<"\n";
+        while(getline(qi, qr)){
+            cout << qr << ' ';
+            string ans;
+            cin >> ans;
             res << ans << "\n";
         }
         cout << "\n";
     }else if(cmd=="2"){
-        int q;
         cin>>q;
-        out(q);
+        out();
     } else {
         change_q();
     }
